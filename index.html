@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <title>QrCode-Generator</title>
+    <link rel="stylesheet" href="./main.css" />
+    <script src="./qrious.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container text-center mt-5">
+        <h3>QrCode Generator - Dimas.Ngoding</h3>
+        <textarea
+          name=""
+          id=""
+          cols="50"
+          rows="3"
+          v-model="text"
+          class="p-3"
+        ></textarea>
+        <div v-if="text" class="output mt-3">
+          <img :src="newQRCode" alt="QRCode" />
+        </div>
+      </div>
+    </div>
+
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          text: "",
+          qrcode: new QRious({ size: 300 }),
+        },
+        computed: {
+          newQRCode() {
+            this.qrcode.value = this.text;
+            return this.qrcode.toDataURL();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
